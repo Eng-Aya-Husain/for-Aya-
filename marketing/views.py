@@ -87,7 +87,7 @@ def Delete_Inventory(request, inventory_id):
 
 
 
-
+#مم
 
 
 
