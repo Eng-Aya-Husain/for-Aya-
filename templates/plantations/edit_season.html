@@ -1,0 +1,10 @@
+{% extends 'plantations/base.html' %}
+{% block content %}
+<h2>تعديل موسم زراعي</h2>
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">حفظ التعديلات</button>
+    <a href="{% url 'season_list' %}">رجوع</a>
+</form>
+{% endblock content %}

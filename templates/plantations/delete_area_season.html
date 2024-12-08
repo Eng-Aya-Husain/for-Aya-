@@ -1,0 +1,10 @@
+{% extends 'plantations/base.html' %}
+{% block content %}
+<h2>حذف موسم منطقة</h2>
+<p>هل انت متاكد من حذف موسم منطقة {{ area_season.area.area_name }}</p>
+<form method="post">
+    {% csrf_token %}
+    <button type="submit">نعم احذف</button>
+    <a href="{% url 'area_season_list' season.id %}">إلغاء</a>
+</form>
+{% endblock content %}

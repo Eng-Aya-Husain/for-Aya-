@@ -1,0 +1,22 @@
+{% extends 'plantations/base.html' %}
+{% block content %}
+
+<h2>مواسم المناطق التابعة  {{ season.season_name }}</h2>
+<a href="{% url 'add_area_season' season.id %}">إضافة موسم منطقة جديد</a>
+
+<ul>
+    {% for area_season in area_season %}
+    <li>
+        <strong>المنطقة:</strong>{{ area_season.area.area_name }}    
+        <br>
+        <strong>تاريخ البداية:</strong>{{ area_season.start_date }}
+        <strong>تاريخ النهاية:</strong>{{ area_season.end_date }}
+        <a href="{% url 'edit_area_season' season.id area_season.id %}">تعديل</a>
+        <a href="{% url 'delete_area_season' season.id area_season.id %}">حذف</a>
+    </li>
+    {% empty %}
+    <p>لا يوجد مواسم مناطق مرتبطة بهذا الموسم حالياً</p>
+    {% endfor %}
+</ul>
+<a href="{% url 'season_list' %}">رجوع</a>
+{% endblock content %}

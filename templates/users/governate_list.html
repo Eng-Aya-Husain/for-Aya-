@@ -1,0 +1,25 @@
+{% extends 'users/base.html' %}
+{% block content %}
+<a href="{% url 'add_governate' %}">إضافة محافظة جديدة</a>
+<table>
+    <tr>
+        <th>الرقم</th>
+        <th>المحافظة </th>
+        <th>الإجراءات</th>
+    </tr>
+    {% for governate in governates %}
+    <tr>
+        <td>{{ governate.id }}</td>
+        <td>
+            <a href="{% url 'area_list' governate.id %}" governate.id>
+                {{ governate.gv_name }}
+            </a>
+        </td>
+        <td>
+            <a href="{% url 'edit_governate' governate.id %}">تعديل</a> |
+            <a href="{% url 'delete_governate' governate.id %}">حذف</a>
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+{% endblock content %}

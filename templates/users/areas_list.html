@@ -1,0 +1,33 @@
+{% extends 'users/base.html' %}
+{% block content %}
+
+<h2>المناطق التابعة لمحافظة {{ governate.gv_name }}</h2>
+<a href="{% url 'add_area' governate.id%}" >اضافة منطقة جديدة</a>
+<table>
+    <tr>
+        <th>#</th>
+        <th>المنطقة</th>
+        <th>الاجراءات</th>
+    </tr>
+    {% for area in areas %}
+    <tr>
+        <td>{{area.id}}</td>
+        <td>
+            <a href="{% url 'user_list' area.id %}" area.id>
+                {{area.area_name}}
+            </a>
+        </td>
+        <td>
+            <a href="{% url 'edit_area' governate.id area.id %}">تعديل</a>
+            <a href="{% url 'delete_area' governate.id area.id %}">حذف</a>
+        </td>
+    </tr>
+    {% empty %}
+    <tr>
+        <td colspan="2">لا توجد مناطق متاحة لهذه المحافظة</td>
+    </tr>
+    {% endfor %}
+</table>
+
+<a href="{% url 'governate_list' %}" class="btn btn-secondray">العودة إلى قائمة المحافظات</a>
+{% endblock content %}

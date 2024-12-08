@@ -1,0 +1,44 @@
+{% extends 'users/base.html' %}
+{% block content %}
+<h2>المستخدمون في منطقة {{area.area_name}}</h2>
+<a href="{% url 'add_user' area.id %}" class="btn btn-primary">إضافة مستخدم جديد</a>
+<table>
+    <tr>
+        <th>الرقم</th>
+        <th>اسم المستخدم</th>
+        <th>نوع المستخدم</th>
+        <th>رقم الهاتف</th>
+        <th>كلمة المرور </th>
+        <th>الصورة</th>
+        <th>المنطقة</th>
+        <th>الحالة</th>
+        <th>الإجراءات</th>
+    </tr>
+    {% for user in users %}
+    <tr>
+        <td>{{ user.id }}</td>
+        <td>
+            <a href="{% url 'account_list' user.id %}">
+                {{ user.username }}
+            </a>
+        </td>
+        <td>{{ user.user_type }}</td>
+        <td>{{ user.phone_number }}</td>
+        <td>{{ user.password }}</td>
+        <td>{{ user.image }}</td>
+        <td>{{ user.area.area_name }}</td>
+        <td>{{ user.status }}</td>
+        <td>
+            <a href="{% url 'edit_user' area.id user.id %}">تعديل</a>|
+            <a href="{% url 'delete_user' area.id user.id %}">حذف</a>
+            <a href="{% url 'crop_list' user.id %}">عرض المزروعات</a>
+        </td>
+    </tr>
+    {% empty %}
+    <tr>
+        <td colspan="2">لا يوجد مستخدمين متاحين في هذه المنطقة</td>
+    </tr>
+    {% endfor %}
+</table>
+<a href="{% url 'area_list' area.governates.id %}">رجوع</a>
+{% endblock content %}

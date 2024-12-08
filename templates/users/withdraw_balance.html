@@ -1,0 +1,15 @@
+{% extends 'users/base.html' %}
+{% block content %}
+<h2>سحب رصيد</h2>
+<p><strong>رقم الحساب:</strong>{{ account.account_number }}</p>
+<p><strong>الرصيد الحالي:</strong>{{ account.balance }}</p>
+
+<form method="post">
+    {% csrf_token %}
+    <label for="amount">المبلغ المطلوب سحبة:</label>
+    <input type="text" id="amount" name="amount" class="form-control"  placeholder="ادخل المبلغ">
+    <br>
+    <button type="submit" class="btn btn-danger">سحب</button>
+</form>  
+<a href="{% url 'account_list' account.user.id %}" class="btn btn-secondary">رجوع</a>  
+{% endblock content %}

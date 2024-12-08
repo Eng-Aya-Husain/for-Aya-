@@ -1,0 +1,14 @@
+{% extends 'users/base.html' %}
+{% block content %}
+<h2>المزروعات الخاصة بالمزارع {{ user.user_name }}</h2>
+<a href="{% url 'add_crop' user.id %}">إضافة مزروع جديد</a>
+<ul>
+    {% for crop in crops %}
+        <li>
+            <img src="{{ crop.plant.image.url }}" alt="{{ crop.plant.plant_name }}" width="100">
+            <strong>{{ crop.crop_name }}</strong> - {{crop.plant.plant_name}}
+            <a href="{% url 'crop_details' user.id crop.id %}">عرض التفاصيل</a>
+        </li>
+    {% endfor %}
+</ul>
+{% endblock content %}

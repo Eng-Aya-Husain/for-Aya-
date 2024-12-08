@@ -1,0 +1,12 @@
+{% extends 'plantations/base.html' %}
+{% block content %}
+<h2>اضافة موسم منطقة جديد</h2>
+
+<form method="post">
+    {% csrf_token %}
+    {{form.as_p}}
+    <p><small>تنسيق التاريخ: DD-MM (مثال: 15-04)</small></p>
+    <button type="submit">إضافة</button>
+</form>
+<a href="{% url 'area_season_list' season.id %}">رجوع</a>
+{% endblock content %}

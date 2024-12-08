@@ -1,0 +1,10 @@
+{% extends 'users/base.html' %}
+{% block content %}
+<h2>إضافة محافظة جديدة</h2>
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">حفظ</button>
+    <a href="{% url 'governate_list' %}">إلغاء</a>
+</form>
+{% endblock content %}

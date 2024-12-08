@@ -1,0 +1,18 @@
+{% extends 'plantations/base.html' %}
+{% block content %}
+<h2>قائمة {{ category.category_name }}</h2>
+<p><a href="{% url 'add_plant' category.id %}">اضافة نبات جديد</a></p>
+<div class="plant-list">
+    {% for plant in plants %}
+    <div class="plant-card">
+        <img src="{{ plant.image.url }}" alt="{{ plant.plant_name }}" class="plant-image">
+        <p>{{ plant.informations|truncatewords:30|linebreaks }}</p>
+        <h3><a href="{% url 'plant_detail' category.id plant.id %}">{{ plant.plant_name }}</a></h3>
+    </div>
+    {% empty %}
+    <p>لا توجد نباتات لهذالصنف</p>
+    {% endfor %}
+</div>
+
+<a href="{% url 'category_list' %}">رجوع</a>
+{% endblock content %}

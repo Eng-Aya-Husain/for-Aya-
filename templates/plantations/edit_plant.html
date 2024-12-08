@@ -1,0 +1,10 @@
+{% extends 'plantations/base.html' %}
+{% block content %}
+<h2>تعديل بيانات النيات</h2>
+<form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">حفظ التعديلات</button>
+</form>
+<a href="{% url 'plant_detail' category.id plant.id %}">رجوع</a>
+{% endblock content %}

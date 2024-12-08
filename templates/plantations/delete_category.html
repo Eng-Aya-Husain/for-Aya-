@@ -1,0 +1,10 @@
+{% extends 'plantations/base.html' %}
+{% block content %}
+<h2>حذف صنف</h2>
+<p>هل انت متأكد من حذف صنف {{ category.category_name }}</p>
+<form method="post">
+    {% csrf_token %}
+    <button type="submit">نعم احذف</button>
+    <a href="{% url 'category_list' %}">إلغاء</a>
+</form>
+{% endblock content %}

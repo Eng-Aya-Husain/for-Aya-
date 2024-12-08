@@ -1,0 +1,10 @@
+{% extends 'users/base.html' %}
+{% block content %}
+<h2>تعديل بيانات المستخدم</h2>
+<form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="btn btn-primary">تعديل</button>
+</form>
+<a href="{% url 'user_list' area.id %}">رجوع</a>    
+{% endblock content %}

@@ -1,0 +1,10 @@
+{% extends 'plantations/base.html' %}
+{% block content %}
+<h2>حذف نبات</h2>
+<p>هل انت متاكد من حذف نبات {{ plant.plant_name}}؟</p>
+<form method="post">
+    {% csrf_token %}
+    <button type="submit">نعم احذف</button>
+</form>
+<a href="{% url 'plant_detail' category.id plant.id %}">إلغاء</a>
+{% endblock content %}

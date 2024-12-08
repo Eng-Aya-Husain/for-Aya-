@@ -1,0 +1,38 @@
+{% extends 'users/base.html'%}
+{% block content %}
+<h2>قائمة المنتجات</h2>
+<a href="{% url 'create_proudct' %}">اضافة منتج جديد</a>
+<table>
+    <thead>
+        <tr>
+            <th>اسم المنتج</th>
+            <th>الصورة</th>
+            <th>الكمية</th>
+            <th>الوحدة</th>
+            <th>السعر</th>
+            <th>الاجراءات </th>
+
+        </tr>
+    </thead>
+    <tbody>
+        {% for product in products %}
+        <tr>
+            <td>{{ product.product_name }}</td>
+            <td><img src="{{ product.product_image.url }}" alt="Product Image" width="50"></td>
+            <td>{{ product.quantity }}</td>
+            <td>{{ product.unite }}</td>
+            <td>{{ product.unite_price }}</td>
+            <td>
+                <a href="{% url 'update_product' product.id %}">تعديل</a>
+                <a href="{% url 'delete_product' product.id %}">حذف</a>
+
+            </td>
+        </tr>
+        {% empty %}
+        <tr>
+            <td colspan="2">لا يوجد اي منتجات</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock content %}

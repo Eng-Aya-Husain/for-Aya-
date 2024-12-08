@@ -1,0 +1,28 @@
+{% extends 'users/base.html' %}
+{% block content %}
+<h2>تسديد الرصيد</h2>
+<p><strong>رقم الحساب :</strong>{{ account.account_number }}</p>
+<p><strong>الرصيد الحالي :</strong>{{ account.balance }}</p>
+
+<form method="post">
+    {% csrf_token %}
+    <label for="amount">اختر باقة:</label><br>
+    <button type="button" onclick="setAmount(10000)" class="btn btn-success">10,000</button>
+    <button type="button" onclick="setAmount(20000)" class="btn btn-success">20,000</button>
+    <button type="button" onclick="setAmount(30000)" class="btn btn-success">30,000</button>
+    <button type="button" onclick="setAmount(50000)" class="btn btn-success">50,000</button>
+    <br><br>
+    <label for="manual_amont">ادخال مبلغ آخر:</label>
+    <input type="text" id="manual_amount" name="amount" class="form-control" placeholder="ادخل المبلغ">
+    <br>
+    <button type="submit" class="btn btn-primary">تسديد</button>
+</form>
+<a href="{% url 'account_list' account.user.id %}" class="btn btn-secondary">رجوع</a>    
+<script>
+    function setAmount(amount){
+        const inputField = document.getElementById('manual_amount');
+        inputField.value = amount;
+    }
+    
+</script>
+{% endblock content %}

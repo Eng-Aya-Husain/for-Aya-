@@ -1,0 +1,11 @@
+{% extends 'plantations/base.html' %}
+{% block content %}
+
+<h2>تعديل المزروع</h2>
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">حفظ التعديلات</button>
+</form>
+<a href="{% url 'crop_details' crop.id user.id %}">رجوع</a>
+{% endblock content %}

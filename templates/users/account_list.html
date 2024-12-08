@@ -1,0 +1,15 @@
+{% extends 'users/base.html' %}
+{% block content %}
+{% if account %}
+    <h2>حساب المستخدم {{ user.username }}</h2>
+    <p><strong>رقم الحساب:</strong> {{ account.account_number }}</p>
+    <p><strong>اسم المستخدم:</strong> {{ account.user.username }}</p>
+    <p><strong>الرصيد:</strong> {{ account.balance }}</p>
+    <p><a href="{% url 'transaction_list' account.id %}" class="btn btn-info">المعاملات المالية</a></p>
+    <a href="{% url 'add_balance' user.id account.id %}" class="btn btn-primary">تسديد</a>
+    <a href="{% url 'withdraw_balance' user.id account.id %}" class="btn btn-primary">سحب</a>
+    <a href="{% url 'user_list' user.area.id %}" class="btn btn-secondary">رجوع</a>
+{% else %}
+    <p>لا يوجد حساب للمستخدم</p>
+{% endif %}
+{% endblock content %}

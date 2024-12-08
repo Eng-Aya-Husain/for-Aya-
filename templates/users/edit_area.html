@@ -1,0 +1,14 @@
+{% extends 'users/base.html' %}
+
+{% block content %}
+<p>governate: {{governate.id}}</p>
+<h2>تعديل بيانات منطقة في مخافظة {{ governate.gv_name }}</h2>
+
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="btn btn-primary">تعديل</button>
+</form>
+<a href="{% url 'area_list' governate.id  %}" class="btn btn-secondary">رجوع</a>
+   
+{% endblock content %}

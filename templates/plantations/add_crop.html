@@ -1,0 +1,10 @@
+{% extends 'plantations/base.html' %}
+{% block content %}
+<h2>إضافة مزروع جديد</h2>
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">إضافة</button>
+</form>
+<a href="{% url 'crop_list' user.id %}">رجوع</a>
+{% endblock content %}

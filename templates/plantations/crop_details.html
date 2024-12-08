@@ -1,0 +1,42 @@
+{% extends 'plantations/base.html' %}
+{% block content %}
+<div>
+    <h2>تفاصيل المزروع</h2>
+    <p><strong>اسم المزرعة:</strong>{{ crop.crop_name }}</p>
+    <p><strong>اسم النبات:</strong>{{ crop.plant.plant_name }}</p>
+    <p><strong>تاريخ الزراعة:</strong>{{ crop.planting_date }}</p>
+
+    <h3>موعد الري القادم</h3>
+    <p><strong>التاريخ:</strong>{{ crop.next_watering_date }}</p>
+    <p><strong>يتبقى:</strong>{{ days_until_watering }} يوم</p>
+    <form method="post" action="{% url 'record_watering' user.id crop.id %}">
+        {% csrf_token %}
+        {{ watering_form.as_p }}
+        <button type="submit">تم الري</button>
+    </form>
+    
+    <h3>موعد التسميد القادم</h3>
+    <p><strong>التاريخ:</strong>{{ crop.next_fertilization_date }}</p>
+    <p><strong>يتبقى:</strong>{{ days_until_fertilization }} يوم</p>
+    <form method="post" action="{% url 'record_fertilization' user.id crop.id %}">
+        {% csrf_token %}
+        {{ fertilization_form.as_p }}
+        <button type="submit">تم التسميد</button>
+    </form>
+    
+    <h3>موعد الحصاد</h3>
+    <p><strong>التاريخ:</strong>{{ crop.harvest_date }}</p>
+    <p><strong>يتبقى:</strong>{{ days_until_harvest }} يوم</p>
+    <form method="post" action="{% url 'update_crop_status' user.id crop.id %}">
+        {% csrf_token %}
+        {{ update_form.as_p }}
+        <button name="status" value="harvested" type="submit">تم الحصاد</button>
+        <button name="status" value="failed" type="submit">تالف</button>
+    </form>
+
+    <a href="{% url 'edit_crop' user.id crop.id %}">تعديل</a>
+    <a href="{% url 'delete_crop' user.id crop.id %}">حذف</a>
+    
+</div>
+<a href="{% url 'crop_list' user.id %}">رجوع</a>
+{% endblock content %}

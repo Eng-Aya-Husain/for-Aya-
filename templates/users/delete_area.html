@@ -1,0 +1,14 @@
+{% extends 'users/base.html' %}
+
+{% block content %}
+<h2>حذف منطقة</h2>
+
+<p>هل انت متأكد من حذف منطقة "{{ area.area_name }}"</p>
+
+<form method="post">
+    {% csrf_token %}
+    <button type="submit" class="btn btn-danger">حذف</button>
+    <a href="{% url 'area_list' governate.id %}" class="btn btn-secondary">إلغاء</a>
+</form>
+
+{% endblock content %}

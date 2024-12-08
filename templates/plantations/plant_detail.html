@@ -1,0 +1,18 @@
+{% extends 'plantations/base.html' %}
+{% block content %}
+<h2>نبات {{ plant_name }}:</h2>
+<div class="plant-detail">
+    <img src="{{ plant.image.url }}" alt="{{ plant.plant_name }}">
+    <p><strong>الصنف:</strong>{{ plant.category.category_name }}</p>
+    <p><strong>اسم النبات:</strong>{{ plant.plant_name }}</p>
+    <p><strong>معلومات عامة:</strong>{{ plant.informations }}</p>
+    <img src="{{ plant.img1.url }}" alt="{{ plant.plant_name }}">
+    <img src="{{ plant.img2.url }}" alt="{{ plant.plant_name }}">
+    <img src="{{ plant.img3.url }}" alt="{{ plant.plant_name }}">
+</div>
+<div class="actions">
+    <a href="{% url 'edit_plant' category.id plant.id %}">تعديل</a>
+    <a href="{% url 'delete_plant' category.id plant.id %}">حذف</a>
+</div>
+<a href="{% url 'plant_list' category.id %}">رجوع</a>
+{% endblock content %}

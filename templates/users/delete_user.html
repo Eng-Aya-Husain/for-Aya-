@@ -1,0 +1,11 @@
+{% extends 'users/base.html' %}
+{% block content %}
+<h2>حذف مستخدم</h2>
+
+<p>هل انت متاكد من حذف المستخدم {{ user.username }}</p>
+<form method="post">
+    {% csrf_token %}
+    <button type="submit" class="btn btn-primary">حذف</button>
+</form>
+<a href="{% url 'user_list' area.id %}" class="btn btn-secondary">رجوع</a>
+{% endblock content %}

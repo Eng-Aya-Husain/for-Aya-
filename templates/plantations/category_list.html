@@ -1,0 +1,26 @@
+{% extends 'plantations/base.html' %}
+{% block content %}
+<h2>قائمة الاصناف</h2>
+<p><a href="{% url 'add_category' %}">إضافة صنف جديد</a></p>
+<div class="category-list">
+    {% for category in category %}
+    <div class="category-card">
+        <h3><a href="{% url 'plant_list' category.id %}">{{ category.category_name }}</a></h3>
+        <a href="{% url 'edit_category' category.id %}">تعديل</a>
+        <a href="{% url 'delete_category' category.id %}">حذف</a> 
+        <ul>
+            {% for plant in category.plants.all|slice:":3" %}
+            <li>
+                <img src="{{ plant.image.url }}" alt="plant.plant_name" class="plant-image">
+                <a href="{% url 'plant_detail' category.id plant.id %}">{{ plant.plant_name }}</a>
+            </li>
+
+            
+            {% empty %}
+            <li>لا توجد نباتات لهذا الصنف</li>
+            {% endfor %}
+        </ul>
+    </div>
+    {% endfor %}
+</div>
+{% endblock content %}

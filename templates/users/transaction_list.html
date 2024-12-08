@@ -1,0 +1,32 @@
+{% extends 'users/base.html' %}
+{% block content %} 
+<h2>سجل المعاملات المالية</h2>
+<p><strong>رقم الحساب</strong>{{ account.account_number }}</p>
+<p><strong>الرصيد الحالي</strong>{{ account.balance }}</p>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>التاريخ</th>
+            <th>نوع العملية</th>
+            <th>الاجمالي</th>
+            <th>الوصف</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for transaction in transaction %}
+        <tr>
+            <td>{{ transaction.transaction_date|date:"Y-m-d H:i" }}</td>
+            <td>{{ transaction.transaction_type }}</td>
+            <td>{{ transaction.amount }}</td>
+            <td>{{ transaction.description|default:"-" }}</td>
+        </tr>
+        {% empty %}
+        <tr>
+            <td colspan="2">لا توجد معاملات حتى الان</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+<a href="{% url 'account_list' account.user.id %}" class="btn btn-secondary">رجوع</a>
+{% endblock content %}
