@@ -1,0 +1,18 @@
+{% extends 'users/base.html' %}
+{% block content %}
+<h2>تفاصيل العنصر</h2>
+<img src="{{inventory.image.url}}" alt="{{inventory.type.plant_name}}" style="width: 200px; height: 200px;">
+<p>النوع:{{ inventory.type.plant_name }}</p>
+<p>الكمية:{{ inventory.quantity }}</p>
+<p>الوحدة:{{ inventory.unit }}</p>
+<p>السعر:{{ inventory.unite_price  }}</p>
+<p>تاريخ الإنتاج:{{ inventory.pr_date }}</p>
+<p>تاريخ انتهاء الصلاحية:{{ inventory.ex_date }}</p>
+<p>الحالة: {{ inventory.inventory_state|yesno:"نشط,غير نشط" }}</p>
+<a href="{% url 'edit_inventory' inventory.id %}" class="btn btn-warning">تعديل</a>
+<form action="{% url 'delete_inventory' inventory.id %}" method="post" style="display: inline;">
+    {% csrf_token %}
+    <button type="submit" class="btn btn-danger">حذف</button>
+</form>
+<a href="{% url 'inventory_list' %}" class="btn btn-secondary">الرجوع</a>
+{% endblock %}
