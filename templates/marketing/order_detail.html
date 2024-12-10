@@ -1,0 +1,17 @@
+{% extends 'users/base.html' %}
+{% block content %}
+<h2>تفاصيل الطلب</h2>
+<p>المستخدم: {{ order.user.username }}</p>
+<p>النوع: {{ order.type.plant_name }}</p>
+<p>الكمية: {{ order.quantity }}</p>
+<p>الوحدة: {{ order.get_unit_display }}</p>
+<p>السعر الإجمالي: {{ order.total_price }}</p>
+<p>التاريخ: {{ order.order_date }}</p>
+<p>الحالة: {{ order.status|yesno:"مكتمل,غير مكتمل" }}</p>
+<a href="{% url 'edit_order' order.id %}" class="btn btn-warning">تعديل</a>
+<form action="{% url 'delete_order' order.id %}" method="post" style="display: inline;">
+    {% csrf_token %}
+    <button type="submit" class="btn btn-danger">حذف</button>
+</form>
+<a href="{% url 'order_list' %}" class="btn btn-secondary">الرجوع</a>
+{% endblock content %}

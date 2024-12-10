@@ -1,0 +1,36 @@
+{% extends 'users/base.html' %}
+{% block content %}
+<h2>قائمة الطلبات</h2>
+<a href="{% url 'create_order' %}" class="btn btn-primary">إضافة طلب جديد</a>
+<table class="table">
+    <thead>
+        <tr>
+            <th>المستخدم</th>
+            <th>النوع</th>
+            <th>الكمية</th>
+            <th>السعر الإجمالي</th>
+            <th>الحالة</th>
+            <th>الإجراءات</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for order in orders %}
+        <tr>
+            <td>{{ order.user.username }}</td>
+            <td>{{ order.type.plant_name }}</td>
+            <td>{{ order.quantity }}</td>
+            <td>{{ order.total_price }}</td>
+            <td>{{ order.status|yesno:"مكتمل,غير مكتمل" }}</td>
+            <td>
+                <a href="{% url 'order_detail' order.id %}" class="btn btn-info">عرض</a>
+                <a href="{% url 'edit_order' order.id %}" class="btn btn-warning">تعديل</a>
+                <form action="{% url 'delete_order' order.id %}" method="post" style="display: inline;">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-danger">حذف</button>
+                </form>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock content %}

@@ -1,7 +1,7 @@
 from django.shortcuts import get_object_or_404, redirect, render
 from django.contrib import messages
-from marketing.forms import InventoryForm, ProductForm
-from marketing.models import Inventory, Product
+from marketing.forms import InventoryForm, OrderForm, ProductForm
+from marketing.models import Inventory, Orders, Product
 
 # Create your views here.
 
@@ -87,7 +87,51 @@ def Delete_Inventory(request, inventory_id):
 
 
 
-#مم
+def Create_Order(request):
+    if request.method == 'POST':
+        form = OrderForm(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(request,'تم اضافة الطلب بنجاح')
+            return redirect('order_list')
+    else:
+        form = OrderForm()
+    return render(request, 'order/create_order.html',{'form':form})  
+
+
+def Order_List(request):
+    orders = Orders.object.all()
+    return render(request, 'orders/order_list.html', {'orders':orders})
+
+
+def Order_Detail(request, order_id):
+    order = get_object_or_404(Orders, id=order_id)
+    return render(request, 'orders/order_detail.html', {'order':order})
+
+
+def Edit_Order(request, Order_id):
+    order = get_object_or_404(Orders, id=Order_id)
+    if request.method == 'POST':
+        form = OrderForm(request.POST, instance=order)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'تم تعديل بيانات الطلب بنجاح')
+            return redirect('order_detail', Order_id=Order_id)
+    else:
+        form = OrderForm(instance=order)
+        return render(request, 'orders/edit_order.html', {'form':form, 'order':order})
+    
+
+def Delete_Order(request, order_id):
+        order = get_object_or_404(Orders, id=order_id)
+        if request.method == 'POST':
+            order.delete()
+            messages.success(request, 'تم حذف الطلب بنجاح')
+            return render(request, 'orders/delete_order.html', {'order':order})
+
+    
+    
+            
 
 
 

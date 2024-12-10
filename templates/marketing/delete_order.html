@@ -1,0 +1,11 @@
+{% extends 'users/base.html' %}
+{% block content %}
+<h2>هل أنت متأكد أنك تريد حذف هذا الطلب؟</h2>
+<p>المستخدم: {{ order.user.username }}</p>
+<p>النوع: {{ order.type.plant_name }}</p>
+<form method="post">
+    {% csrf_token %}
+    <button type="submit" class="btn btn-danger">نعم، احذف</button>
+    <a href="{% url 'order_list' %}" class="btn btn-secondary">إلغاء</a>
+</form>
+{% endblock content %}

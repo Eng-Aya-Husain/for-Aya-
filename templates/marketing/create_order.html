@@ -1,0 +1,10 @@
+{% extends 'users.html' %}
+{% block content %}
+<h2>اضافة طلب جديد</h2>
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">حفظ</button>
+</form>
+<a href="{% url 'order_list' %}">إلغاء</a>
+{% endblock content%}
