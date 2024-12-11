@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>إضافة إشعار محصول جديد</h2>
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="btn btn-success">حفظ</button>
+</form>
+<a href="{% url 'crop_alert_list' %}" class="btn btn-secondary">إلغاء</a>
+{% endblock content %}

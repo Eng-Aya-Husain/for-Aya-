@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>قائمة تنبيهات المواسم</h2>
+<a href="{% url 'create_season_alert' %}" class="btn btn-primary">إضافة تنبيه جديد</a>
+<table class="table">
+    <thead>
+        <tr>
+            <th>الإشعار</th>
+            <th>الموسم</th>
+            <th>الإجراءات</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for alert in season_alerts %}
+        <tr>
+            <td>{{ alert.notification.title }}</td>
+            <td>{{ alert.season.season.season_name }}</td>
+            <td>
+                <a href="{% url 'season_alert_detail' alert.id %}" class="btn btn-info">عرض</a>
+                <a href="{% url 'edit_season_alert' alert.id %}" class="btn btn-warning">تعديل</a>
+                <form action="{% url 'delete_season_alert' alert.id %}" method="post" style="display: inline;">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-danger">حذف</button>
+                </form>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock content %}

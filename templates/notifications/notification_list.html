@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>قائمة الإشعارات</h2>
+<a href="{% url 'create_notification' %}" class="btn btn-primary">إضافة إشعار جديد</a>
+<table class="table">
+    <thead>
+        <tr>
+            <th>العنوان</th>
+            <th>الإجراءات</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for notification in notifications %}
+        <tr>
+            <td>{{ notification.title }}</td>
+            <td>
+                <a href="{% url 'notification_detail' notification.id %}" class="btn btn-info">عرض</a>
+                <a href="{% url 'edit_notification' notification.id %}" class="btn btn-warning">تعديل</a>
+                <form action="{% url 'delete_notification' notification.id %}" method="post" style="display: inline;">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-danger">حذف</button>
+                </form>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock content %}

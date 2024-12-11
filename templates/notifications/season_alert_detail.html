@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>تفاصيل تنبيه الموسم</h2>
+<p>الإشعار: {{ season_alert.notification.title }}</p>
+<p>الموسم: {{ season_alert.season.season.season_name }}</p>
+<a href="{% url 'edit_season_alert' season_alert.id %}" class="btn btn-warning">تعديل</a>
+<form action="{% url 'delete_season_alert' season_alert.id %}" method="post" style="display: inline;">
+    {% csrf_token %}
+    <button type="submit" class="btn btn-danger">حذف</button>
+</form>
+<a href="{% url 'season_alert_list' %}" class="btn btn-secondary">الرجوع</a>
+{% endblock content %}

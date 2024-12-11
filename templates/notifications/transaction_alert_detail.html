@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>تفاصيل تنبيه المعاملة</h2>
+<p>الإشعار: {{ transaction_alert.notification.title }}</p>
+<p>المعاملة: {{ transaction_alert.transaction.pk }}</p>
+<a href="{% url 'edit_transaction_alert' transaction_alert.id %}" class="btn btn-warning">تعديل</a>
+<form action="{% url 'delete_transaction_alert' transaction_alert.id %}" method="post" style="display: inline;">
+    {% csrf_token %}
+    <button type="submit" class="btn btn-danger">حذف</button>
+</form>
+<a href="{% url 'transaction_alert_list' %}" class="btn btn-secondary">الرجوع</a>
+{% endblock content %}

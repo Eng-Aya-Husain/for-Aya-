@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>تفاصيل الإشعار</h2>
+<p>العنوان: {{ notification.title }}</p>
+<p>الرسالة: {{ notification.message }}</p>
+<a href="{% url 'edit_notification' notification.id %}" class="btn btn-warning">تعديل</a>
+<form action="{% url 'delete_notification' notification.id %}" method="post" style="display: inline;">
+    {% csrf_token %}
+    <button type="submit" class="btn btn-danger">حذف</button>
+</form>
+<a href="{% url 'notification_list' %}" class="btn btn-secondary">الرجوع</a>
+{% endblock content %}

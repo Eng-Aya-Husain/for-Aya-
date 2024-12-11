@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>تفاصيل إشعار المحصول</h2>
+<p>الإشعار: {{ crop_alert.notification.title }}</p>
+<p>المحصول: {{ crop_alert.crop.crop_name }}</p>
+<a href="{% url 'edit_crop_alert' crop_alert.id %}" class="btn btn-warning">تعديل</a>
+<form action="{% url 'delete_crop_alert' crop_alert.id %}" method="post" style="display: inline;">
+    {% csrf_token %}
+    <button type="submit" class="btn btn-danger">حذف</button>
+</form>
+<a href="{% url 'crop_alert_list' %}" class="btn btn-secondary">الرجوع</a>
+{% endblock content %}

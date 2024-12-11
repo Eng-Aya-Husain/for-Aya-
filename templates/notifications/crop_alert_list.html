@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>قائمة إشعارات المحاصيل</h2>
+<a href="{% url 'create_crop_alert' %}" class="btn btn-primary">إضافة إشعار جديد</a>
+<table class="table">
+    <thead>
+        <tr>
+            <th>الإشعار</th>
+            <th>المحصول</th>
+            <th>الإجراءات</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for alert in crop_alerts %}
+        <tr>
+            <td>{{ alert.notification.title }}</td>
+            <td>{{ alert.crop.crop_name }}</td>
+            <td>
+                <a href="{% url 'crop_alert_detail' alert.id %}" class="btn btn-info">عرض</a>
+                <a href="{% url 'edit_crop_alert' alert.id %}" class="btn btn-warning">تعديل</a>
+                <form action="{% url 'delete_crop_alert' alert.id %}" method="post" style="display: inline;">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-danger">حذف</button>
+                </form>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock content %}

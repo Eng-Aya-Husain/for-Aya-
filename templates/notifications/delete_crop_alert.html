@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>هل أنت متأكد أنك تريد حذف هذا الإشعار؟</h2>
+<p>الإشعار: {{ crop_alert.notification.title }}</p>
+<p>المحصول: {{ crop_alert.crop.crop_name }}</p>
+<form method="post">
+    {% csrf_token %}
+    <button type="submit" class="btn btn-danger">نعم، احذف</button>
+    <a href="{% url 'crop_alert_list' %}" class="btn btn-secondary">إلغاء</a>
+</form>
+{% endblock content %}
